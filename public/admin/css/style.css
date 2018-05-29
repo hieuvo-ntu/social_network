@@ -1,0 +1,57 @@
+button i.fa-heart-o:hover {
+    color:red;
+
+}
+button i.fa-comment-o:hover {
+    color:blue;
+
+}
+.input-radius{
+        border:none;
+        border-radius: 21px;
+}
+.topnav-right a {
+    color:#fff;
+
+}
+.topnav-right a:hover {
+
+    background-color:#5352B2;
+
+}
+.logo{
+    font-family: 'Anton', sans-serif;
+    color:#fff !important;
+}
+.card-header{
+
+}
+.card-img{
+    padding:5px;
+}
+.card-author{
+    margin:3px;
+    font-weight: bold;
+    font-size:16px;
+}
+.card-time{
+    font-size:12px;
+    font-family: Helvetica,Arial,sans-serif;
+    color: #90949c;
+}
+.card-option{
+    float:right;
+}
+.card-option button{
+
+    background-color:#F7F7F7;
+    padding:0px;
+
+}
+.card-footer{
+    padding:2px !important;
+    text-align: center;
+}
+.card-footer button{
+    background-color:#F7F7F7;
+}
