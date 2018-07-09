@@ -10,14 +10,41 @@
     <script src="{{ url('public/admin/js/bootstrap.min.js') }}"></script>
     <script src="{{ url('public/admin/js/jquery.min.js') }}"></script>
     <script src="{{ url('public/admin/js/popper.min.js') }}"></script>
+    <style>
+        body{
+            background-color: #F5FAFC;
+        }
+        .btn{
+            border-radius: 20px;
+        }
+        form{
+            background-color:#fff;
+            padding:40px 20px;
+            border-radius:15px;
+            padding-top:70px!important;
+        }
+        .container{
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        img{
+            position: relative;
+            width: 15px;
+            top:70px;
+            z-index: 100;
+        }
+    </style>
 </head>
+
 <body>
 
-
-<div class="col-md-6 offset-md-3" style="padding:20px">
-
+<div class="container">
+    <img style="width: 10%;text-align: center" src="public/source/user/dhnhatrang.gif">
+    <div class="col-md-6" style="padding:20px">
     <form action="{{route('login')}}" method="POST">
-
         @if(count($errors)>0)
             @foreach($errors->all() as $error)
                 <div class="alert alert-danger d-md-block">{{$error}}</div>
@@ -37,9 +64,13 @@
         </div>
 
         <div class="col-md-6 offset-md-3">
-            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+            <button type="submit" class="btn btn-outline-primary btn-block">Đăng nhập</button>
+            <span class="" style="margin-right:10px;font-weight:initial"><a href="">Quên mật khẩu</a></span><br>
+            <span class="" style="margin-right:10px;font-weight:initial">Chưa có tài khoản <a href="register">Đăng ký</a></span>
         </div>
+
     </form>
+    </div>
 </div>
 </body>
 </html>

@@ -1,11 +1,19 @@
-button i.fa-heart-o:hover {
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+}
+button i:hover {
     color:red;
 
 }
-button i.fa-comment-o:hover {
-    color:blue;
+button i:hover {
+    color:red;
 
 }
+button i.fa{
+    color:red;
+}
+
 .input-radius{
         border:none;
         border-radius: 21px;
@@ -24,7 +32,9 @@ button i.fa-comment-o:hover {
     color:#fff !important;
 }
 .card-header{
-
+    background-color:#fff;
+    border:none;
+    padding-bottom:0px;
 }
 .card-img{
     padding:5px;
@@ -48,10 +58,38 @@ button i.fa-comment-o:hover {
     padding:0px;
 
 }
+.card-body{
+    padding:0!important;
+}
+.card-text{
+    height: 300px;
+    font-size:35px;
+    background-color: #9fcdff;
+    color:#fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .card-footer{
     padding:2px !important;
     text-align: center;
+    background-color: #fff;
 }
 .card-footer button{
-    background-color:#F7F7F7;
+    background-color:#fff;
+}
+.comment_post{
+    position: fixed;
+}
+.introduce li a{
+    padding:15px;
+    color:#657786 !important;
+
+}
+.introduce li a:hover{
+    border-bottom:2px solid #007CB4;
+    background-color:rgba(251,248,255,0.79);
+
 }
