@@ -14,7 +14,6 @@
     </div>
 </div>
 <div class="container-fluid" style="padding-top:25px">
-
     <div class="post-area">
 
     </div>
@@ -93,8 +92,6 @@
             if(($(window).scrollTop()>=$(document).height()-$(window).height())){
 
                 //$('#loading').show();
-
-
                 $.ajax({
                     url:"<?php echo e(route('postAjax')); ?>",
                     type:"post",
@@ -133,7 +130,6 @@
 
                                     }else if(css.hasClass("fa-heart"))
                                     {
-
                                         css.removeClass("fa-heart").addClass("fa-heart-o");
                                         var id=this.title;
                                         ajax_unlike(id,css);
@@ -148,54 +144,6 @@
                 });
              }//ket thuc IF
             return false;
-        });
-
-
-        $(document).on('click','.comments',function () {
-            var post_id=$(this).attr("id");
-
-            $.ajax({
-                url:"getUserPost",
-                type:"post",
-                data:{post_id:post_id},
-                success:function (data) {
-                    $('#exampleModalTitle').html('Trả lời bài viết của '+data);
-                    $('textarea').attr('name',post_id);
-                    $('#myModal').modal('show');
-
-                }
-            })
-        });
-
-        $(document).on('click','.post',function () {
-            var id=$(this).attr("name");
-            $.ajax({
-                url:"getCommentPost",
-                type:"post",
-                data:{post_id:id},
-                success:function (data) {
-                    alert(data);
-                    $('.modal-body-comment').html(data);
-                    $('#exampleModalLong').modal('show');
-
-                }
-            })
-        });
-
-
-        $(document).on('click','.Reply',function () {
-            var reply=$("#comment-text").val();
-                var post_id = $('textarea').attr('name');
-                $.ajax({
-                    url: 'postComment',
-                    type: "post",
-                    data: {reply: reply, post_id: post_id},
-                    success: function (response) {
-                        $('#myModal').modal('hide');
-
-                    }
-                });
-
         });
 
 
@@ -249,7 +197,7 @@
             <div class="modal-body modal-body-comment">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>

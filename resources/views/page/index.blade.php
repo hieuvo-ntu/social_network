@@ -14,7 +14,6 @@
     </div>
 </div>
 <div class="container-fluid" style="padding-top:25px">
-
     <div class="post-area">
 
     </div>
@@ -93,8 +92,6 @@
             if(($(window).scrollTop()>=$(document).height()-$(window).height())){
 
                 //$('#loading').show();
-
-
                 $.ajax({
                     url:"{{route('postAjax')}}",
                     type:"post",
@@ -133,7 +130,6 @@
 
                                     }else if(css.hasClass("fa-heart"))
                                     {
-
                                         css.removeClass("fa-heart").addClass("fa-heart-o");
                                         var id=this.title;
                                         ajax_unlike(id,css);
@@ -151,108 +147,12 @@
         });
 
 
-        $(document).on('click','.comments',function () {
-            var post_id=$(this).attr("id");
-
-            $.ajax({
-                url:"getUserPost",
-                type:"post",
-                data:{post_id:post_id},
-                success:function (data) {
-                    $('#exampleModalTitle').html('Trả lời bài viết của '+data);
-                    $('textarea').attr('name',post_id);
-                    $('#myModal').modal('show');
-
-                }
-            })
-        });
-
-        $(document).on('click','.post',function () {
-            var id=$(this).attr("name");
-            $.ajax({
-                url:"getCommentPost",
-                type:"post",
-                data:{post_id:id},
-                success:function (data) {
-                    alert(data);
-                    $('.modal-body-comment').html(data);
-                    $('#exampleModalLong').modal('show');
-
-                }
-            })
-        });
-
-
-        $(document).on('click','.Reply',function () {
-            var reply=$("#comment-text").val();
-                var post_id = $('textarea').attr('name');
-                $.ajax({
-                    url: 'postComment',
-                    type: "post",
-                    data: {reply: reply, post_id: post_id},
-                    success: function (response) {
-                        $('#myModal').modal('hide');
-
-                    }
-                });
-
-        });
-
-
     });
 
 
 
 </script>
 <!-- The Modal -->
-<div class="modal" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalTitle">Bình luận bài viết</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label class="col-form-label">Bình luận</label>
-                        <textarea class="form-control" id="comment-text" placeholder="Bình luận của bạn"></textarea>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary Reply" >Trả lời</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- Button trigger modal -->
-
-<!-- Modal Comment-->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-body-comment">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+@include('modal')
 </body>
 </html>

@@ -103,4 +103,15 @@ class PostController extends Controller
     //return response()->json($json);
     }
 
+    public function getSinglePost($id)
+    {
+        $singlePost=Post::where('id',$id)->first();
+        $isLike=DB::table('likes')->where('user_id',Auth::user()->id)
+            ->where('post_id',$id)->count();
+
+        if($isLike!=0) $Liked="fa fa-heart";
+        else $Liked="fa fa-heart-o";
+        return view('page.post',compact('singlePost','Liked'));
+    }
+
 }

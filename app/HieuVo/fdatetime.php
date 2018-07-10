@@ -6,9 +6,9 @@ $data_time_now=date('Y-m-d H:i:s');
                         $interval=$start_time->diff($current_time);
                         if($interval->y>=1){
                             if($interval==1){
-                                $time_message=$interval->y. " năm trước";
+                                $time_message=$interval->y. " năm trước ";
                             }else{
-                                $time_message=$interval->y. " năm trước";
+                                $time_message=$interval->y. " năm trước ";
                             }
                         }else if($interval->m>=1){
                             if($interval->d==0){
@@ -21,9 +21,9 @@ $data_time_now=date('Y-m-d H:i:s');
                             }
 
                             if($interval->m==1){
-                                $time_message=$interval->m." tháng".$day;
+                                $time_message=$interval->m." tháng ".$day;
                             }else{
-                                $time_message=$interval->m." tháng".$day;
+                                $time_message=$interval->m." tháng ".$day;
                             }
                         }else if($interval->d>=1 ){
                             if($interval->d==1){
