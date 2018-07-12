@@ -32,6 +32,10 @@ class CommentController extends Controller
         $comment->post_body=$req->reply;
         $comment->posted_by=Auth::user()->id;
         $comment->post_id=$id;
+        if(isset($req->user_id))
+            $comment->reply_id=$req->user_id;
+        else
+            $comment->reply_id=0;
         $comment->removed="no";
         $comment->save();
 
@@ -47,6 +51,15 @@ class CommentController extends Controller
             $notifi->save();
         }
         return "success";
+    }
+
+    public function getNumComment($id)
+    {
+        $count=Post_Comment::where('post_id',$id)->count();
+        if($count==0){
+            return "0";
+        }else
+            return $count;
     }
 
     public function loadComment(Request $req)
@@ -69,16 +82,22 @@ class CommentController extends Controller
                 ['post_id',$comment->post_id],
                 ['posted_by',Auth::user()->id]
             ])->count();
-            $text.="<div><span style='font-weight: bold'>$username:</span>";
+            $id_username=User::where('id',$comment->posted_by)->value('id');
+            $text.="<div name='$username' id='$id_username'><span style='font-weight: bold'>$username:</span>";
             if($ownPost>0) {
-                $text .= "<a href='hideComment/$comment->id' style='float:right' class='btn btn-danger btn-sm confirm'>ẩn</a>";
+                $text .= "<a href='hideComment/$comment->id' style='float:right;font-size: x-small' class='btn btn-danger btn-sm confirm'>ẩn</a>";
             }else if($userComment>0){
-                $text.="<a href='removeComment/$comment->id' style='float:right' class='btn btn-danger btn-sm confirm'>xóa</a>";
+                $text.="<a href='removeComment/$comment->id' style='float:right;font-size: x-small' class='btn btn-danger btn-sm confirm'>xóa</a>";
             }else{
                 $text.="";
             }
+            if($comment->reply_id!=0 && $comment->reply_id!=Auth::user()->id){
+                $reply_user=User::where('id',$comment->reply_id)->value('username');
+                $text.="</br><span style='font-weight: bold'>Trả lời@".$reply_user."</span> ". $comment->post_body."</br>
+                    <span class='card-time' >$date    </span><a style='font-size:14px' id='reply-comment'>Trả lời</a></div>";
+            }else
             $text.="</br>$comment->post_body</br>
-                    <span class='card-time'>$date    </span><a href='' style='font-size:14px'>Trả lời</a></div>";
+                    <span class='card-time' >$date    </span><a style='font-size:14px' id='reply-comment'>Trả lời</a></div>";
         }
 
         return $text;

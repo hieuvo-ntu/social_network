@@ -1,3 +1,6 @@
+body{
+    background-color: #E5EBF0!important;
+}
 .btn:focus,.btn:active {
     outline: none !important;
     box-shadow: none;
@@ -92,4 +95,29 @@ button i.fa{
     border-bottom:2px solid #007CB4;
     background-color:rgba(251,248,255,0.79);
 
+}
+.search_results {
+    background-color: #fff;
+    border: 1px solid #DADADA;
+    border-bottom: none;
+    border-top: none;
+    margin-top: 21px;
+}
+
+.search_results_footer{
+    padding: 7px 4px 0px 4px;
+    height: 30px;
+    border: 1px solid #DADADA;
+    border-top: none;
+    background-color: #20AAE5;
+    text-align: center;
+}
+
+.search_results_footer a {
+    color: #fff;
+}
+
+.search_result {
+    padding: 10px;
+    height: 100px;
 }

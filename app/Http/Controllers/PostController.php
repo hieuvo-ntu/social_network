@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Friend;
 use App\Like;
 use App\Post;
+use App\Post_Comment;
 use App\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
@@ -84,17 +85,19 @@ class PostController extends Controller
 
                 if($isLike!=0) $data['isLike']="fa fa-heart";
                 else $data['isLike']="fa fa-heart-o";
+
+                $getNumComments= new CommentController();
+                $numComments=$getNumComments->getNumComment($id);
+
                 $data['id']=$id;
                 $data['like']=$post->likes;
                 $data['body']=$body;
                 $data['user_id']=$added_by_user;
                 $data['username']=$username;
                 $data['date']=$date_time;
+                $data['numComments']=$numComments;
                 array_push($json,$data);
-
-
                 //Mỗi lần load dc 3 post
-
             }
     }
         //echo $str;
@@ -105,13 +108,16 @@ class PostController extends Controller
 
     public function getSinglePost($id)
     {
+        $getNumComments= new CommentController();
+        $numComments=$getNumComments->getNumComment($id);
         $singlePost=Post::where('id',$id)->first();
+        $Comments_Post=Post_Comment::where('post_id',$id)->get();
         $isLike=DB::table('likes')->where('user_id',Auth::user()->id)
             ->where('post_id',$id)->count();
 
         if($isLike!=0) $Liked="fa fa-heart";
         else $Liked="fa fa-heart-o";
-        return view('page.post',compact('singlePost','Liked'));
+        return view('page.post',compact('singlePost','Liked','numComments','Comments_Post'));
     }
 
 }

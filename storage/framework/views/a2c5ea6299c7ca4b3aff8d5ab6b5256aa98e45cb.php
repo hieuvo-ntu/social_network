@@ -5,6 +5,5 @@
 <script src="<?php echo e(url('public/admin/js/jquery.min.js')); ?>"></script>
 <script src="<?php echo e(url('public/admin/js/popper.min.js')); ?>"></script>
 <script src="<?php echo e(url('public/admin/js/bootstrap.min.js')); ?>"></script>
-<script src="<?php echo e(url('public/admin/js/processOnClick.js')); ?>"></script>
-
+<script src="<?php echo e(url('public/admin/js/script.js')); ?>"></script>
 <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">

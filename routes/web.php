@@ -136,6 +136,14 @@ Route::group(['middleware'=>'auth'],function() {
        'as'=>'status',
        'uses'=>'PostController@getSinglePost'
     ]);
+    Route::get('searchUser',[
+        'as'=>'searchUser',
+        'uses'=>'UserController@getSearchUser'
+    ]);
+    Route::post('ajaxSearchUser',[
+        'as'=>'ajaxSearchUser',
+        'uses'=>'UserController@postAjaxSearchUser'
+    ]);
 });
 
 

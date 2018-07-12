@@ -43,7 +43,6 @@ class LikeController extends Controller
         $this->upDateNumLike($var,'1');
         $count_like=$this->getNumLike($var);
         $user_id=Post::where('id',$var)->value('added_by_user');
-
         $notifi=new Notification();
         $notifi->user_id=$user_id;
         $notifi->from_user=Auth::user()->id;

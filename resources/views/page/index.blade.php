@@ -1,6 +1,7 @@
 @include('header')
 <script src="{{url('public/js/ajax_like.js')}}"></script>
 <script src="{{url('public/js/ajax_unlike.js')}}"></script>
+<script src="{{ url('public/admin/js/processOnClick.js') }}"></script>
 <div class="container-fluid">
     <div class="col-sm-4 offset-sm-4">
         <form action="{{route('postpost')}}" method="POST" style="margin-top:20px">
@@ -54,14 +55,14 @@
                 });
                 console.log(data);
                 for(var i=0;i<data.length;i++) {
-                    console.log(data[i].isLike);
+                    //console.log(data[i].isLike);
                     var text = '<div class="col-sm-6 offset-sm-3" style="margin-top:20px" >';
                     text += '<div class="card"> <div class="card-header">';
                     text += '<img class="card-img-top card-img" style="width: 60px;float:left" src="public/source/user/img_avatar1.png" alt="Card image cap">';
                     text += '<div class="card-author d-inline-block"><a href="profile/'+data[i].user_id+'">' + data[i].username + '</a></div>';
                     text += '<div class="card-time">' + data[i].date + '</div> </div> <div class="card-body post" name="'+data[i].id+'"> <p class="card-text">' + data[i].body + '</p> </div>';
                     text += '<div class="card-footer comment"> <div class="btn-group btn-group-justified d-block"><button type="button" title="'+data[i].id+'" class="col-6 btn button'+data[i].id+'"><i class="'+data[i].isLike+' fa-lg">' + data[i].like+'</i></button>'
-                    text += '<button type="button" id="'+data[i].id+'" class="btn col-6 comments"><i class="fa fa-comment-o fa-lg"></i></button></div> </div> </div> </div>';
+                    text += '<button type="button" id="'+data[i].id+'" class="btn col-6 comments"><i class="fa fa-comment-o fa-lg">'+data[i].numComments+'</i></button></div> </div> </div> </div>';
                     $('.post-area').append(text);
                     $(document).on("click", ".button" + data[i].id, function () {
 
@@ -102,7 +103,7 @@
                     },
                     cache:false,
                     success:function (data) {
-                        console.log(data);
+                        //console.log(data);
                         //$('#loading').hide();
                         //$.each(data,function(key,index){
 
@@ -115,7 +116,7 @@
                             text += '<div class="card-author d-inline-block"><a href="profile/'+data[i].user_id+'">' + data[i].username + '</a></div>';
                             text += '<div class="card-time">' + data[i].date + '</div> </div> <div class="card-body post" name="'+data[i].id+'"> <p class="card-text">' + data[i].body + '</p> </div>';
                             text += '<div class="card-footer comment"> <div class="btn-group btn-group-justified d-block"><button type="button" title="'+data[i].id+'" class="col-6 btn button'+data[i].id+'"><i class="'+data[i].isLike+' fa-lg">' + data[i].like+'</i></button>'
-                            text += '<button type="button" id="'+data[i].id+'" class="btn col-6 comments"><i class="fa fa-comment-o fa-lg"></i></button></div> </div> </div> </div>';
+                            text += '<button type="button" id="'+data[i].id+'" class="btn col-6 comments"><i class="fa fa-comment-o fa-lg">'+data[i].numComments+'</i></button></div> </div> </div> </div>';
                             $('.post-area').append(text);
 
                                 $(document).on("click", ".button" + data[i].id, function () {

@@ -1,4 +1,5 @@
 
+{{--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="{{ url('public/admin/js/jquery.min.js') }}"></script>
+--}}
 
 
     <style type="text/css">

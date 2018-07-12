@@ -141,4 +141,48 @@ class UserController extends Controller
         ])->delete();
         return redirect()->back();
     }
+
+    public function postAjaxSearchUser(Request $req)
+    {
+        $search=$req->search;
+        $name=explode(" ",$search);
+       /* if(strpos($search,'_')!==false){*/
+            $results=User::where([
+                ['username','like',"{$search}%"],
+            ])->get();
+        //}
+        /*else if(count($name)==2){
+            $results=User::where([
+                ['firstname','like',"{$name[1]}%"],
+                ['lastname','like',"{$name[0]}%"]
+            ])->get();
+        }else{
+            $results=User::where([
+                ['firstname','like',"{$name[1]}%"],
+
+            ])
+                ->orWhere([
+                    ['lastname','like',"{$name[1]}%"],
+
+                ])->get();
+        }*/
+        $text="";
+        if($search!=""){
+            foreach($results as $result)
+            {
+                $text.="<div class='resultDisplay'>
+                            <a href='profile/".$result->id."'style='color:#1485BD'>
+                                <div class='liveSearchProfilePic'>
+                                <img src=''>
+                                </div>
+                                <div class='liveSearchText'>
+                                ".$result->firstname." ".$result->lastname."
+                                <p>".$result->username."</p>
+                                </div>
+                            </a>
+                         </div>";
+            }
+        }
+    return "$text";
+    }
 }

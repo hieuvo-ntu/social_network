@@ -126,15 +126,19 @@
 
     </div>
         <div class="col-sm-4">
-        <form class="form-inline">
+        <form class="form-inline" action="" name="search-form" method="get">
 
             <div class="input-group">
-                <input class="form-control form-control-sm input-radius" type="text" placeholder="Tìm kiếm">
+                <input class="form-control form-control-sm input-radius" type="text" name="s" onkeyup="getSearchUser(this.value)" autocomplete="off" placeholder="Tìm kiếm" id="search_text_input">
                 <span class="input-group-btn">
                 <button class="btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </form>
+            <div class="search_results">
+            </div>
+            <div class="search_results_footer_empty">
+            </div>
         </div>
 
 
