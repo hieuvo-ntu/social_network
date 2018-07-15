@@ -11,7 +11,15 @@ class RedisController extends Controller
 {
     public function index($id)
     {
-        $messages=Message::all();
+        $messages=Message::where([
+            ['user_from',$id],
+            ['user_to',Auth::user()->id]
+        ])
+            ->orWhere([
+                ['user_from',Auth::user()->id],
+                ['user_to',$id]
+            ])->get();
+        ;
         return view('page.message',compact('messages'));
     }
 

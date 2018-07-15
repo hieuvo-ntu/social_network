@@ -21,8 +21,9 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
+                <button type="button" class="btn btn-primary Reply" >Gửi</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary Reply" >Trả lời</button>
+
             </div>
         </div>
 
@@ -73,8 +74,9 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
+                <button type="button" class="btn btn-primary Reply-Comment" >Gửi</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary Reply-Comment" >Trả lời bình luận</button>
+
             </div>
         </div>
 

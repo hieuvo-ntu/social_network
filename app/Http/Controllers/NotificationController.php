@@ -33,4 +33,12 @@ class NotificationController extends Controller
         return $text;
         /**/
     }
+
+    public function loadNotification(){
+        $unSeeNoti=Notification::where([
+            ['user_id',Auth::user()->id],
+            ['viewed',0]
+        ])->count();
+        return response()->json(['unSeeNoti'=>$unSeeNoti]);
+    }
 }

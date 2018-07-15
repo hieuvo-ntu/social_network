@@ -1,6 +1,7 @@
 @include('header')
 <script src="{{url('public/js/ajax_like.js')}}"></script>
 <script src="{{url('public/js/ajax_unlike.js')}}"></script>
+<script src="{{url('public/admin/js/script_post.js')}}"></script>
 <?php $username = DB::table('users')->where('id', $singlePost->added_by_user)->value('username');?>
 <div class="container-fluid" style="padding-top:25px">
     <div class="post-area">
@@ -8,7 +9,17 @@
             <div class="card">
                 <div class="card-header"><img class="card-img-top card-img" style="width: 60px;float:left" src="public/source/user/img_avatar1.png" alt="Card image cap">
                 <div class="card-author d-inline-block"><a href="profile/{{$singlePost->added_by_user}}">{{$username}}</a></div>
-                <div class="card-time">{{convert_date_time($singlePost->created_at)}}</div> </div> <div class="card-body post" name="{{$singlePost->id}}"> <p class="card-text">{{$singlePost->body}}</p></div>
+                    <div class="dropdown float-right"><button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown"></button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            @if($singlePost->added_by_user==Auth::user()->id)
+                                <a class="dropdown-item edit" id="{{$singlePost->id}}" >Chỉnh sửa bài viết</a>
+                                <a class="dropdown-item confirm" href="deletePost/{{$singlePost->id}}">Xóa bài viết</a>
+                            @else
+                                <a class="dropdown-item" href="">Báo cáo bài viết</a>
+                            @endif
+                        </div>
+                    </div>
+                <div class="card-time">{{convert_date_time($singlePost->created_at)}}</div> </div> <div class="card-body post" name="{{$singlePost->id}}"> <p class="card-text">{!!$singlePost->body!!}</p></div>
                 <div class="card-footer comment"> <div class="btn-group btn-group-justified d-block"><button type="button" title="{{$singlePost->id}}" class="col-5 btn button{{$singlePost->id}}"><i class="{{$Liked}} fa-lg">{{$singlePost->likes}}</i></button>
                     <button type="button" id="{{$singlePost->id}}" class="btn col-6 comments"><i class="fa fa-comment-o fa-lg">{{$numComments}}</i></button></div>
                 </div>
@@ -54,63 +65,45 @@
             }
         })
     });
-    $(document).on('click','.comments',function () {
-        var post_id=$(this).attr("id");
-
-        $.ajax({
-            url:"getUserPost",
-            type:"post",
-            data:{post_id:post_id},
-            success:function (data) {
-                $('#exampleModalTitle').html('Trả lời bài viết của '+data);
-                $('textarea').attr('name',post_id);
-                $('#myModal').modal('show');
-
-            }
-        })
-    });
-    $(document).on('click','.Reply',function () {
-        var reply=$("#comment-text").val();
-        var post_id = $('textarea').attr('name');
-        $.ajax({
-            url: 'postComment',
-            type: "post",
-            data: {reply: reply, post_id: post_id},
-            success: function (response) {
-                $('#myModal').modal('hide');
-                window.location.reload(true);
-
-            }
-        });
-    });
-
-    $(document).on('click','.Reply-Comment',function () {
-        var reply=$("#reply-comment-text").val();
-        var user_id = $('textarea').attr('name');
+    $(document).on('click','#update_post',function () {
+        var update=$('#edit-text').val();
         var post_id='{{$singlePost->id}}';
         $.ajax({
-            url: 'postComment',
+            url: 'updatePost',
             type: "post",
-            data: {reply: reply, post_id: post_id,user_id:user_id},
+            data: {update:update,post_id:post_id},
             success: function (response) {
                 $('#myModal').modal('hide');
                 window.location.reload(true);
-
             }
         });
     });
-
-    $(document).on('click','#reply-comment',function () {
-        var reply_comment_user=$('#reply-comment').parent().attr('name');
-        var user_id=$('#reply-comment').parent().attr('id');
-        $('#commentModalTitle').html('Trả lời bình luận của '+reply_comment_user);
-        $('textarea').attr('name',user_id);
-                $('#myReplyModal').modal('show');
-    });
-    $(document).on('click','.confirm',function () {
-        return confirm("Bạn có chắc muốn thực hiện hành động này?");
-    })
-
 </script>
 <!-- The Modal -->
 @include('modal')
+<div>
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa bài viết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="edit-modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label"></label>
+                            <textarea class="form-control required" id="edit-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="update_post">Cập nhật</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

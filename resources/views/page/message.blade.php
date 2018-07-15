@@ -1,5 +1,3 @@
-
-{{--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="{{ url('public/admin/js/jquery.min.js') }}"></script>
---}}
-
+    <script src="{{ url('public/js/call_function.js') }}"></script>
 
     <style type="text/css">
 
@@ -597,6 +594,107 @@
                 padding: 5px 2px 5px 0 !important;
                 font-size: 1.8em !important;
             }
+
+
+            ul {
+                display:block;
+                background:#45619D;
+                list-style:none;
+
+            }
+            ul li {
+                float:left;
+
+                font-weight:bold;
+                margin:3px 0;
+            }
+            ul li a {
+                color:#FFF;
+                text-decoration:none;
+                padding:6px 15px;
+                cursor:pointer;
+            }
+            ul li a:hover {
+                background:#425B90;
+                text-decoration:none;
+                cursor:pointer;
+            }
+
+            #noti_Button {
+                color:#fff;
+            }
+
+            /* THE POPULAR RED NOTIFICATIONS COUNTER. */
+            #noti_Counter {
+                display:block;
+                position:absolute;
+                background:#E1141E;
+                color:#FFF;
+                font-size:12px;
+                font-weight:normal;
+                padding:1px 3px;
+                margin:-8px 0 0 25px;
+                border-radius:2px;
+                -moz-border-radius:2px;
+                -webkit-border-radius:2px;
+                z-index:99;
+            }
+
+            /* THE NOTIFICAIONS WINDOW. THIS REMAINS HIDDEN WHEN THE PAGE LOADS. */
+            #notifications {
+                display:none;
+                width:400px;
+                position:absolute;
+                top:42px;
+
+                background:#FFF;
+                border:solid 1px rgba(100, 100, 100, .20);
+                -webkit-box-shadow:0 3px 8px rgba(0, 0, 0, .20);
+                z-index: 100;
+            }
+            /* AN ARROW LIKE STRUCTURE JUST OVER THE NOTIFICATIONS WINDOW */
+            #notifications:before {
+                content: '';
+                display:block;
+                width:0;
+                height:0;
+                color:transparent;
+                border:10px solid #CCC;
+                border-color:transparent transparent #FFF;
+                margin-top:-20px;
+                margin-left:22px;
+            }
+
+            h3 {
+                display:block;
+                color:#333;
+                background:#FFF;
+                font-weight:bold;
+                font-size:13px;
+                padding:8px;
+                margin:0;
+                border-bottom:solid 1px rgba(100, 100, 100, .30);
+            }
+
+            .seeAll {
+                background:#F6F7F8;
+                padding:8px;
+                font-size:12px;
+                font-weight:bold;
+                border-top:solid 1px rgba(100, 100, 100, .30);
+                text-align:center;
+            }
+            .seeAll a {
+                color:#3b5998;
+            }
+            .seeAll a:hover {
+                background: #F6F7F8;
+                color: #3b5998;
+                text-decoration: underline;
+            }
+            .fa {
+                padding :0px 15px;
+            }
         }
     </style>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -617,6 +715,8 @@
 <body>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<a href="{{route('index')}}" class="btn btn-outline-info">Quay trở về trang chủ</a>
+
 <div class="container app">
     <div class="row app-one">
         <div class="col-sm-4 side">
@@ -644,199 +744,6 @@
                     </div>
                 </div>
 
-                <div class="row sideBar">
-                    <div class="row sideBar-body">
-                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
-                            <div class="avatar-icon">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
-                            </div>
-                        </div>
-                        <div class="col-sm-9 col-xs-9 sideBar-main">
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8 sideBar-name">
-                  <span class="name-meta">John Doe
-                </span>
-                                </div>
-                                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                  <span class="time-meta pull-right">18:18
-                </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row sideBar-body">
-                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
-                            <div class="avatar-icon">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png">
-                            </div>
-                        </div>
-                        <div class="col-sm-9 col-xs-9 sideBar-main">
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8 sideBar-name">
-                  <span class="name-meta">John Doe
-                </span>
-                                </div>
-                                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                  <span class="time-meta pull-right">18:18
-                </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row sideBar-body">
-                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
-                            <div class="avatar-icon">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png">
-                            </div>
-                        </div>
-                        <div class="col-sm-9 col-xs-9 sideBar-main">
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8 sideBar-name">
-                  <span class="name-meta">John Doe
-                </span>
-                                </div>
-                                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                  <span class="time-meta pull-right">18:18
-                </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row sideBar-body">
-                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
-                            <div class="avatar-icon">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar4.png">
-                            </div>
-                        </div>
-                        <div class="col-sm-9 col-xs-9 sideBar-main">
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8 sideBar-name">
-                  <span class="name-meta">John Doe
-                </span>
-                                </div>
-                                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                  <span class="time-meta pull-right">18:18
-                </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row sideBar-body">
-                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
-                            <div class="avatar-icon">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar5.png">
-                            </div>
-                        </div>
-                        <div class="col-sm-9 col-xs-9 sideBar-main">
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8 sideBar-name">
-                  <span class="name-meta">John Doe
-                </span>
-                                </div>
-                                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                  <span class="time-meta pull-right">18:18
-                </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row sideBar-body">
-                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
-                            <div class="avatar-icon">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png">
-                            </div>
-                        </div>
-                        <div class="col-sm-9 col-xs-9 sideBar-main">
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8 sideBar-name">
-                  <span class="name-meta">John Doe
-                </span>
-                                </div>
-                                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                  <span class="time-meta pull-right">18:18
-                </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row sideBar-body">
-                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
-                            <div class="avatar-icon">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
-                            </div>
-                        </div>
-                        <div class="col-sm-9 col-xs-9 sideBar-main">
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8 sideBar-name">
-                  <span class="name-meta">John Doe
-                </span>
-                                </div>
-                                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                  <span class="time-meta pull-right">18:18
-                </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row sideBar-body">
-                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
-                            <div class="avatar-icon">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png">
-                            </div>
-                        </div>
-                        <div class="col-sm-9 col-xs-9 sideBar-main">
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8 sideBar-name">
-                  <span class="name-meta">John Doe
-                </span>
-                                </div>
-                                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                  <span class="time-meta pull-right">18:18
-                </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row sideBar-body">
-                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
-                            <div class="avatar-icon">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png">
-                            </div>
-                        </div>
-                        <div class="col-sm-9 col-xs-9 sideBar-main">
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8 sideBar-name">
-                  <span class="name-meta">John Doe
-                </span>
-                                </div>
-                                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                  <span class="time-meta pull-right">18:18
-                </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row sideBar-body">
-                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
-                            <div class="avatar-icon">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar4.png">
-                            </div>
-                        </div>
-                        <div class="col-sm-9 col-xs-9 sideBar-main">
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8 sideBar-name">
-                  <span class="name-meta">John Doe
-                </span>
-                                </div>
-                                <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                  <span class="time-meta pull-right">18:18
-                </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="side-two">
@@ -1077,7 +984,7 @@
                 <div class="row message-previous">
                     <div class="col-sm-12 previous">
                         <a onclick="previous(this)" id="ankitjain28" name="20">
-                            Show Previous Message!
+
                         </a>
                     </div>
                 </div>
@@ -1116,9 +1023,9 @@
             <form method="post" action>
                 {{ csrf_field() }}
             <div class="row reply">
-                <div class="col-sm-1 col-xs-1 reply-emojis">
+                {{--<div class="col-sm-1 col-xs-1 reply-emojis">
                     <i class="fa fa-smile-o fa-2x"></i>
-                </div>
+                </div>--}}
                 <div class="col-sm-9 col-xs-9 reply-main">
                     <textarea class="form-control" rows="1" name="textmessage" id="comment"></textarea>
                 </div>
@@ -1126,7 +1033,7 @@
                     <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
                 </div>-->
                 <div class="col-sm-1 col-xs-1 reply-send">
-                    <button type="submit" class="btn">
+                    <button type="submit" class="btn btn-sm">
                         <i class="fa fa-send fa-2x" aria-hidden="true"></i></button>
                 </div>
             </div>

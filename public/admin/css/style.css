@@ -65,15 +65,12 @@ button i.fa{
     padding:0!important;
 }
 .card-text{
-    height: 300px;
-    font-size:35px;
-    background-color: #9fcdff;
-    color:#fff;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    font-size:16px;
+
+    color: #000000;
+    padding:10px;
+    padding-left:22px;
+
 }
 .card-footer{
     padding:2px !important;
@@ -97,18 +94,23 @@ button i.fa{
 
 }
 .search_results {
+    position: absolute;
+    z-index: 100;
+    width: 250px;
+    top:40px;
     background-color: #fff;
     border: 1px solid #DADADA;
-    border-bottom: none;
     border-top: none;
     margin-top: 21px;
 }
 
 .search_results_footer{
+    width: 250px;
     padding: 7px 4px 0px 4px;
     height: 30px;
     border: 1px solid #DADADA;
     border-top: none;
+    border-bottom: none;
     background-color: #20AAE5;
     text-align: center;
 }
@@ -121,3 +123,85 @@ button i.fa{
     padding: 10px;
     height: 100px;
 }
+.liveSearchProfilePic img {
+    height: 50px;
+    border-radius: 25px;
+    margin: 1px 12px 0 2px;
+    float: left;
+}
+
+.liveSearchText {
+    background-color: transparent;
+    color: #1E96CA;
+}
+
+.liveSearchText p{
+    margin-left: 10px;
+    font-size: 12px;
+}
+/*Thong bao*/
+#noti_Button {
+    color:#fff;
+}
+
+/* THE POPULAR RED NOTIFICATIONS COUNTER. */
+#noti_Counter {
+    display:block;
+    position:absolute;
+    background:#E1141E;
+    color:#FFF;
+    font-size:12px;
+    font-weight:normal;
+    padding:1px 3px;
+    margin:-8px 0 0 25px;
+    border-radius:2px;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    z-index:99;
+}
+
+/* THE NOTIFICAIONS WINDOW. THIS REMAINS HIDDEN WHEN THE PAGE LOADS. */
+#notifications {
+    display:none;
+    width:400px;
+    position:absolute;
+    top:42px;
+
+    background:#FFF;
+    border:solid 1px rgba(100, 100, 100, .20);
+    -webkit-box-shadow:0 3px 8px rgba(0, 0, 0, .20);
+    z-index: 100;
+}
+/* AN ARROW LIKE STRUCTURE JUST OVER THE NOTIFICATIONS WINDOW */
+#notifications:before {
+    content: '';
+    display:block;
+    width:0;
+    height:0;
+    color:transparent;
+    border:10px solid #CCC;
+    border-color:transparent transparent #FFF;
+    margin-top:-20px;
+    margin-left:22px;
+}
+/*Request */
+#request_Button {
+    color:#fff;
+}
+
+/* THE POPULAR RED NOTIFICATIONS COUNTER. */
+#request_Counter {
+    left: 147px;
+    position:absolute;
+    background:#E1141E;
+    color:#FFF;
+    font-size:12px;
+    font-weight:normal;
+    padding:1px 3px;
+    margin:0px 0 0 0px;
+    border-radius:2px;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    z-index:99;
+}
+/*End request*/

@@ -27,7 +27,7 @@
             </div>
             <div class="col-sm-4">
                 <?php if(Auth::user()->id!=$user_info->id): ?>
-                    <a href="" class="btn btn-outline-info"><i class="fa fa-envelope-o"></i>Gửi tin nhắn</a>
+                    <a href="message/<?php echo e($user_info->id); ?>" class="btn btn-outline-info"><i class="fa fa-envelope-o"></i>Gửi tin nhắn</a>
                     <?php if($friend==1): ?>
                         <a href="deleteFriend/<?php echo e($user_info->id); ?>" class="btn btn-outline-info confirm"><i class="fa fa-user-times"></i>Hủy kết bạn</a>
                     

@@ -67,24 +67,41 @@
         <div class="col-md-6">
         <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
         <div class="form-group">
-            <input type="text" class="form-control"placeholder="Họ" name="txtlastname" value="<?php echo e(old('txtlastname')); ?>">
+            <input type="text" class="form-control"placeholder="Họ" required name="txtlastname" value="<?php echo e(old('txtlastname')); ?>">
         </div>
         </div>
         <div class="col-md-6">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Tên" name="txtfirstname" value="<?php echo e(old('txtfirstname')); ?>">
+            <input type="text" class="form-control" placeholder="Tên" required name="txtfirstname" value="<?php echo e(old('txtfirstname')); ?>">
         </div>
         </div>
     </div>
+            <div class="form-group">
+                <input type="date" class="form-control" placeholder="Ngày sinh" required name="txtemail" value="<?php echo e(old('txtemail')); ?>">
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label" for="radio1">
+                    <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Nam
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label" for="radio2">
+                    <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Nữ
+                </label>
+            </div>
         <div class="form-group">
-            <input type="email" class="form-control" placeholder="Địa chỉ email" name="txtemail" value="<?php echo e(old('txtemail')); ?>">
+            <input type="email" class="form-control" placeholder="Địa chỉ email" required name="txtemail" value="<?php echo e(old('txtemail')); ?>">
         </div>
 
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Điện thoại" required name="txtemail" value="<?php echo e(old('txtemail')); ?>">
+            </div>
+
         <div class="form-group">
-            <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" name="txtpswd" value="<?php echo e(old('txtpswd')); ?>">
+            <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" required name="txtpswd" value="<?php echo e(old('txtpswd')); ?>">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" id="pwd" placeholder="Nhập lại mật khẩu" name="txtre-pswd">
+            <input type="password" class="form-control" id="pwd" placeholder="Nhập lại mật khẩu" required name="txtre-pswd">
         </div>
         <div class="col-md-6 offset-md-3">
         <button type="submit" class="btn btn-block" style="background-color: #388FF4;color:#fff">Đăng kí</button>

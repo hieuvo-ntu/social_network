@@ -54,6 +54,17 @@ Route::group(['middleware'=>'auth'],function() {
         'as' => 'postAjax',
         'uses' => 'PostController@postPostAjax'
     ]);
+
+    Route::get('deletePost/{id}',[
+        'as'=>'deletePost',
+        'uses'=>'PostController@deletePost'
+    ]);
+
+    Route::post('updatePost',[
+       'as'=>'updatePost',
+       'uses'=>'PostController@updatePost'
+    ]);
+
     Route::get('getComment/{id}', [
         'as' => 'getComment',
         'uses' => 'CommentController@getComment'
@@ -62,6 +73,7 @@ Route::group(['middleware'=>'auth'],function() {
         'as' => 'postComment',
         'uses' => 'CommentController@postComment'
     ]);
+
     Route::get('profile/{id}', [
         'as' => 'profile',
         'uses' => 'UserController@getProfile'
@@ -86,6 +98,11 @@ Route::group(['middleware'=>'auth'],function() {
     Route::post('getNotification', [
         'as' => 'getNotification',
         'uses' => 'NotificationController@getNotification'
+    ]);
+
+    Route::post('loadNotification',[
+        'as'=>'loadNotification',
+        'uses'=>'NotificationController@loadNotification'
     ]);
     //Lấy tên của chủ bài viết
     Route::post('getUserPost', [
@@ -143,6 +160,10 @@ Route::group(['middleware'=>'auth'],function() {
     Route::post('ajaxSearchUser',[
         'as'=>'ajaxSearchUser',
         'uses'=>'UserController@postAjaxSearchUser'
+    ]);
+    Route::post('loadRequestFriend',[
+        'as'=>'loadRequestFriend',
+        'uses'=>'UserController@loadRequestFriend'
     ]);
 });
 

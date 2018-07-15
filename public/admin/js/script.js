@@ -34,7 +34,8 @@ function getSearchUser(s) {
                 $(".search_results_footer_empty").toggleClass("search_results_footer_empty");
             }
             $('.search_results').html(data);
-            $('.search_results_footer').html("<a href='search"+s+"'>Xem tất cả</a>");
+            $('.search_results_footer').html("<a href='searchUser?s="+s+"'>Xem tất cả</a>");
+
             if(data==""){
                 $('.search_results_footer').html("");
                 $('.search_results_footer').toggle("search_results_footer_empty");

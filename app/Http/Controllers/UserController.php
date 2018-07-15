@@ -145,13 +145,13 @@ class UserController extends Controller
     public function postAjaxSearchUser(Request $req)
     {
         $search=$req->search;
-        $name=explode(" ",$search);
-       /* if(strpos($search,'_')!==false){*/
+        //$name=explode(" ","$search");
+        //if(strpos($search,' ')!==false){
             $results=User::where([
-                ['username','like',"{$search}%"],
-            ])->get();
+                ['username','like',"%{$search}%"],
+            ])->take(5)->get();
         //}
-        /*else if(count($name)==2){
+        /*else if(count($name)>=2){
             $results=User::where([
                 ['firstname','like',"{$name[1]}%"],
                 ['lastname','like',"{$name[0]}%"]
@@ -184,5 +184,15 @@ class UserController extends Controller
             }
         }
     return "$text";
+    }
+    public function getSearchUser(Request $req){
+        $users=User::where('username','like','%'.$req->s.'%')
+            ->orWhere('username','like',$req->s.'%')->get();
+        return view('page.search_all',compact('users'));
+    }
+
+    public function loadRequestFriend(){
+        $unRequest=Friend_Request::where('user_to',Auth::user()->id)->count();
+        return response()->json(['unRequest'=>$unRequest]);
     }
 }

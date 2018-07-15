@@ -11,8 +11,7 @@
     <script src="{{ url('public/js/call_function.js') }}"></script>
     <style>
         ul {
-            display:block;
-            background:#45619D;
+
             list-style:none;
 
         }
@@ -34,50 +33,7 @@
             cursor:pointer;
         }
 
-        #noti_Button {
-            color:#fff;
-        }
 
-        /* THE POPULAR RED NOTIFICATIONS COUNTER. */
-        #noti_Counter {
-            display:block;
-            position:absolute;
-            background:#E1141E;
-            color:#FFF;
-            font-size:12px;
-            font-weight:normal;
-            padding:1px 3px;
-            margin:-8px 0 0 25px;
-            border-radius:2px;
-            -moz-border-radius:2px;
-            -webkit-border-radius:2px;
-            z-index:99;
-        }
-
-        /* THE NOTIFICAIONS WINDOW. THIS REMAINS HIDDEN WHEN THE PAGE LOADS. */
-        #notifications {
-            display:none;
-            width:400px;
-            position:absolute;
-            top:42px;
-
-            background:#FFF;
-            border:solid 1px rgba(100, 100, 100, .20);
-            -webkit-box-shadow:0 3px 8px rgba(0, 0, 0, .20);
-            z-index: 100;
-        }
-        /* AN ARROW LIKE STRUCTURE JUST OVER THE NOTIFICATIONS WINDOW */
-        #notifications:before {
-            content: '';
-            display:block;
-            width:0;
-            height:0;
-            color:transparent;
-            border:10px solid #CCC;
-            border-color:transparent transparent #FFF;
-            margin-top:-20px;
-            margin-left:22px;
-        }
 
         h3 {
             display:block;
@@ -113,7 +69,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #388FF4">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #388FF4">
     <div class="container">
 
     <div class="col-sm-4">
@@ -125,8 +81,8 @@
 
 
     </div>
-        <div class="col-sm-4">
-        <form class="form-inline" action="" name="search-form" method="get">
+    <div class="col-sm-4">
+        <form class="form-inline" action="{{route('searchUser')}}" name="search-form">
 
             <div class="input-group">
                 <input class="form-control form-control-sm input-radius" type="text" name="s" onkeyup="getSearchUser(this.value)" autocomplete="off" placeholder="Tìm kiếm" id="search_text_input">
@@ -135,11 +91,11 @@
                 </span>
             </div>
         </form>
-            <div class="search_results">
-            </div>
-            <div class="search_results_footer_empty">
-            </div>
+        <div class="search_results">
         </div>
+        <div class="search_results_footer_empty">
+        </div>
+    </div>
 
 
     <div class="col-sm-4 topnav-right">
@@ -158,7 +114,11 @@
                 <div class="seeAll"><a href="#">Xem thêm</a></div>
             </div>
         </div>
-        <li><a hfre="" class="btn btn-sm"><i class="fa fa-users fa-lg" style="color:#fff"></i></a></li>
+        <li><a id="request_Button" class="btn btn-sm"><i class="fa fa-users fa-lg" style="color:#fff"></i></a></li>
+            <!--SHOW NOTIFICATIONS COUNT.-->
+            <div id="request_Counter"></div>
+
+
         <li><a href="" class="btn btn-sm"><i class="fa fa-envelope-o fa-lg"></i></a></li>
 
         {{--<li><a href="#" class="btn btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-lg"></i></a></li>--}}
@@ -188,16 +148,68 @@
                 // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
                 $('#notifications').fadeToggle('fast', 'linear', function () {
                     if ($('#notifications').is(':hidden')) {
-                        //$('#noti_Button').css('background-color', );
+                        $('#noti_Button').css('background-color', );
                     }
-                    // CHANGE BACKGROUND COLOR OF THE BUTTON.
-                    //else $('#noti_Button').css('background-color', 'rgb(46, 70, 124)');
+                    //CHANGE BACKGROUND COLOR OF THE BUTTON.
+                    else $('#noti_Button').css('background-color', 'rgb(46, 70, 124)');
                 });
 
                 $('#noti_Counter').fadeOut('slow');     // HIDE THE COUNTER.
 
                 return false;
             });
+
+            //Request Notification
+            $('#request_Counter')
+                .css({ opacity: 0 })
+                .text('0')
+                .css({ top: '-10px' })// ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
+                .animate({ top: '-10px', opacity: 1 }, 500);
+            $('#request_Button').click(function () {
+                // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
+
+                        $('#request_Button').css('background-color', );
+
+                    //CHANGE BACKGROUND COLOR OF THE BUTTON.
+                    $('#request_Button').css('background-color', 'rgb(46, 70, 124)');
+
+
+                $('#request_Counter').fadeOut('slow');     // HIDE THE COUNTER.
+
+                return false;
+            });
+            //End Request
+
+            function loadUnseenNotifi() {
+                $.ajax({
+                    url:"{{route('loadNotification')}}",
+                    method:"POST",
+                    dataType:"json",
+                    success:function (data) {
+                        if(data.unSeeNoti>0){
+                            $('#noti_Counter').text(data.unSeeNoti);
+                            $('#noti_Counter').fadeIn('slow');
+                        }
+                    }
+                });
+            }
+            function loadRequestFriend() {
+                $.ajax({
+                    url:"{{route('loadRequestFriend')}}",
+                    method:"POST",
+                    dataType:"json",
+                    success:function (data) {
+                        if(data.unRequest>0){
+                            $('#request_Counter').text(data.unRequest);
+                            $('#request_Counter').fadeIn('slow');
+                        }
+                    }
+                })
+            }
+            /*setInterval(function () {
+                loadUnseenNotifi();
+                loadRequestFriend();
+            },5000);*/
 
         });
     </script>
